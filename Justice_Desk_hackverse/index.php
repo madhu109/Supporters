@@ -43,13 +43,9 @@
 						    	<span>harikamam@gmail.com</span>
 						    </div>
 					    </div>
-					    <div class="col-md d-flex topper align-items-center align-items-stretch py-md-4">
-					    	<div class="icon d-flex justify-content-center align-items-center"><span class="icon-phone2"></span></div>
-						    <div class="text">
-						    	<span>Call</span>
-						    	<span>Call Us: + 91 XXXXXXXXX</span>
-						    </div>
-					    </div>
+					  
+							<p><a href="justice_chats/login.php" class="btn btn-primary px-4 py-3 mt-3">Messages</a></p>
+					    
 				    </div>
 			    </div>
 		    </div>

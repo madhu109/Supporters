@@ -1,0 +1,63 @@
+-- ===============================
+-- JusticeDesk Database Structure
+-- ===============================
+
+-- 1. Create Database
+CREATE DATABASE IF NOT EXISTS justicedeck;
+USE justicedeck;
+
+-- 2. Users Table
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    role ENUM('user','lawyer') NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 3. Lawyers Table
+CREATE TABLE IF NOT EXISTS lawyers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    specialization VARCHAR(255),
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 4. Chats Table
+CREATE TABLE IF NOT EXISTS chats (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    lawyer_id INT NOT NULL,
+    message TEXT NOT NULL,
+    sender ENUM('user','lawyer','ai') NOT NULL,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (lawyer_id) REFERENCES lawyers(id) ON DELETE CASCADE
+);
+
+-- 5. Optional: AI Messages Table (if separate)
+CREATE TABLE IF NOT EXISTS ai_messages (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    lawyer_id INT NOT NULL,
+    message TEXT NOT NULL,
+    response TEXT,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (lawyer_id) REFERENCES lawyers(id) ON DELETE CASCADE
+);
+
+-- 6. Sample Data (optional)
+INSERT INTO users (name,email,password,role) VALUES 
+('Test User','user@example.com','password','user');
+
+INSERT INTO lawyers (name,email,specialization,password) VALUES
+('John Doe','john@example.com','Criminal Law','password'),
+('Jane Smith','jane@example.com','Family Law','password');
+
+INSERT INTO chats (user_id, lawyer_id, message, sender) VALUES
+(1,1,'Hello, I need advice','user'),
+(1,1,'Sure, how can I help you?','lawyer');
