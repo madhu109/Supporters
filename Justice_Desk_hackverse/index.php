@@ -44,7 +44,7 @@
 						    </div>
 					    </div>
 					  
-							<p><a href="justice_chats/login.php" class="btn btn-primary px-4 py-3 mt-3">Messages</a></p>
+							<p><a href="justicedesk_chats/login.php" class="btn btn-primary px-4 py-3 mt-3">Messages</a></p>
 					    
 				    </div>
 			    </div>
